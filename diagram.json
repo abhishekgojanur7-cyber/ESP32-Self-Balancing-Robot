@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": -48, "left": 81.64, "attrs": {} },
+    { "type": "wokwi-mpu6050", "id": "imu1", "top": -15.38, "left": -55.28, "attrs": {} },
+    { "type": "wokwi-a4988", "id": "drv1", "top": -120, "left": -43.2, "attrs": {} },
+    { "type": "wokwi-a4988", "id": "drv2", "top": -110.4, "left": 340.8, "attrs": {} },
+    {
+      "type": "wokwi-stepper-motor",
+      "id": "stepper1",
+      "top": 90.01,
+      "left": -95.57,
+      "attrs": { "size": "17" }
+    },
+    {
+      "type": "wokwi-stepper-motor",
+      "id": "stepper2",
+      "top": 80.41,
+      "left": 211.63,
+      "attrs": { "size": "17" }
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": -16.06,
+      "left": 211.43,
+      "attrs": { "i2cAddress": "0x3c" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "drv1:1B", "stepper1:A+", "green", [ "h-124.65", "v326.48", "h57.6" ] ],
+    [ "drv1:1A", "stepper1:A-", "green", [ "h-153.45", "v336.08", "h76.8", "v-9.6" ] ],
+    [ "drv1:2A", "stepper1:B+", "green", [ "h-153.45", "v355.28" ] ],
+    [ "stepper1:B-", "drv1:2B", "green", [ "v9.6", "h-153.61", "v-384" ] ],
+    [ "drv2:1B", "stepper2:A+", "green", [ "h-9.45", "v326.48", "h-105.6" ] ],
+    [ "drv2:1A", "stepper2:A-", "green", [ "h0.15", "v345.68", "h-115.2" ] ],
+    [ "drv2:2A", "stepper2:B+", "green", [ "h9.75", "v364.88", "h-19.2" ] ],
+    [ "drv2:2B", "stepper2:B-", "green", [ "h19.35", "v384.08", "h-48" ] ],
+    [ "drv1:RESET", "drv1:SLEEP", "green", [ "h-19.2", "v9.6" ] ],
+    [ "drv2:RESET", "drv2:SLEEP", "green", [ "h-19.2", "v9.6" ] ],
+    [ "drv1:STEP", "esp:12", "green", [ "h-9.6", "v28.8", "h124.8", "v124.8" ] ],
+    [ "drv1:DIR", "esp:14", "green", [ "h0", "v9.6", "h105.6", "v124.8" ] ],
+    [ "drv2:STEP", "esp:27", "green", [ "h-153.6", "v220.8", "h-134.4", "v-96" ] ],
+    [ "drv2:DIR", "esp:26", "green", [ "h-144", "v220.8", "h-134.4", "v-115.2" ] ],
+    [ "imu1:SDA", "esp:21", "green", [ "v-9.6", "h86.48", "v-38.4", "h96" ] ],
+    [ "oled1:SDA", "esp:21", "green", [ "v0" ] ],
+    [ "imu1:SCL", "esp:22", "green", [ "v0" ] ],
+    [ "oled1:SCL", "esp:22", "green", [ "v0" ] ],
+    [ "esp:3V3", "imu1:VCC", "green", [ "h0" ] ],
+    [ "oled1:VCC", "esp:3V3", "red", [ "v-57.6", "h-28.65" ] ],
+    [ "drv1:VDD", "esp:3V3", "green", [ "h0" ] ],
+    [ "drv2:VDD", "esp:3V3", "green", [ "h-134.25", "v-19.12", "h-192" ] ],
+    [ "oled1:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "imu1:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "drv1:GND.1", "esp:GND.1", "black", [ "v0" ] ],
+    [ "drv2:GND.1", "esp:GND.1", "black", [ "v0" ] ],
+    [ "drv1:VMOT", "esp:5V", "green", [ "h0" ] ],
+    [ "drv2:VMOT", "esp:5V", "green", [ "h0" ] ],
+    [ "drv2:GND.2", "esp:GND.2", "black", [ "h0" ] ],
+    [ "drv1:GND.2", "esp:GND.1", "black", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
